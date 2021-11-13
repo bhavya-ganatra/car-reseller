@@ -4,6 +4,7 @@ import Home from "./Pages/Home";
 import Cars from "./Pages/Cars";
 import Sell from "./Pages/Sell";
 import Detail from "./Pages/Detail";
+import MyAccount from "./Pages/MyAccount";
 
 export default function Routes(){
     return(
@@ -13,6 +14,7 @@ export default function Routes(){
             <Cars path="/cars" />
             <Sell path="/sell" />
             <Detail path="/detail" />
+            <MyAccount path="/myaccount"/>
         </Router>
         </>
     );
