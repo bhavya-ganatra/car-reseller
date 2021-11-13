@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
-import ImgMediaCard from './ImgMediaCard'
 import './MyAccount.css'
 import Carousel from 'react-material-ui-carousel'
 import { Grid, makeStyles } from '@material-ui/core'
 import Navbar from '../Components/Navbar'
+import Postcard from '../Components/Postcard'
 
 const useStyle = makeStyles(theme=>({
     root123: {
@@ -48,7 +48,7 @@ function MyAccount() {
                         <Carousel className="carsold_carousel">
                         {carnames.map((car,i)=>(
                             <Grid container justifyContent="center">
-                                <ImgMediaCard carname={car}/>
+                                <Postcard carname={car} price={100}/>
                             </Grid>
                         ))
                         }

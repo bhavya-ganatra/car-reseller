@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function Postcard(){
+export default function Postcard({carname,price}){
     const classes = useStyles();
     return(
         <div className={classes.postcard}>
@@ -33,10 +33,10 @@ export default function Postcard(){
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            Car
+                            {carname}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Price: <FontAwesomeIcon icon="rupee-sign" /> 400
+                            Price: <FontAwesomeIcon icon="rupee-sign" /> {400}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
