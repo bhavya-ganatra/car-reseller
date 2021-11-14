@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import Postcard from "../Components/Postcard";
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,6 +6,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { Grid } from "@material-ui/core";
+
+import db from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -37,6 +39,22 @@ export default function Cars(){
     const [location, setLocation] = React.useState('None');
     const [budget, setBudget] = React.useState('None');
     const [brand, setBrand] = React.useState('None');
+    const [carsdata,setCarsdata] = useState([]);
+
+    useEffect(()=>{
+        db.collection('cars')
+        .get()
+        .then((queryData)=>{
+            setCarsdata(queryData.docs.map(doc=>({
+                "id":doc.id,                
+                "data":doc.data()
+            })))
+            // console.log(queryData.docs.map(doc=>(doc.data())))
+        })
+        .catch(err=>console.log(err))
+
+        // console.log(carsdata)
+    },[])
 
     const selectLocation = (event) => {
         setLocation(event.target.value);
@@ -127,9 +145,15 @@ export default function Cars(){
                 </Button>
             </div>
 
-            
+            {
+                carsdata.map(car=>(
+                    <Postcard key={car.id} className={classes.postcard} 
+                    carname={car.data.name} 
+                    price={car.data.price}/>
+                ))
+            }
 
-            <Grid container spacing={1}>
+            {/* <Grid container spacing={1}>
                 <Grid item xs={12} sm={6} md={4} lg={3}>
                     <Postcard className={classes.postcard}/>
                 </Grid>
@@ -145,7 +169,7 @@ export default function Cars(){
                 <Grid item xs={12} sm={6} md={4} lg={3}>
                     <Postcard className={classes.postcard}/>
                 </Grid>
-            </Grid>
+            </Grid> */}
 
         </div>
     );

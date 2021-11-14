@@ -1,29 +1,30 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './MyAccount.css'
 import Carousel from 'react-material-ui-carousel'
 import { Grid, makeStyles } from '@material-ui/core'
 import Navbar from '../Components/Navbar'
 import Postcard from '../Components/Postcard'
 
-const useStyle = makeStyles(theme=>({
-    root123: {
-        height: '100vh',
-      },
-      image123: {
-        backgroundRepeat: 'no-repeat',
-        backgroundColor:
-        theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        width: "100%",
-        height: "95vh",
-      }
-}))
+import db from '../firebase'
 
 function MyAccount() {
     const carnames = ["car1","car2","car3","car4","car5","car6"]
     // const carnames=[]
-    const classes = useStyle();
+    const [cars,setCars] = useState([]);
+
+    useEffect(()=>{
+        db.collection('users')
+        .doc('user1')//id of document -- current user
+        .get()
+        .then((queryData)=>{
+            setCars(queryData.data().mycars)
+        })
+        .catch(err=>console.log(err))
+
+        console.log(cars)
+    },[])
+
+
     return (
         <div className="myaccount">
             <Navbar/>
@@ -41,14 +42,14 @@ function MyAccount() {
             </div>
             
             <div className="carsold">
-                {carnames && carnames.length>0?
+                {cars && cars.length>0?
                     (
                         <div>
                         <h1>Sold Cars</h1>
                         <Carousel className="carsold_carousel">
-                        {carnames.map((car,i)=>(
-                            <Grid container justifyContent="center">
-                                <Postcard carname={car} price={100}/>
+                        {cars.map((car)=>(
+                            <Grid key={car.id} container justifyContent="center">
+                                <Postcard carname={car.name} price={car.price} buysell={car.type}/>
                             </Grid>
                         ))
                         }
