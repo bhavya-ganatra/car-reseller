@@ -19,16 +19,12 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-<<<<<<< HEAD
-export default function Postcard({carname,price,buysell}){
-=======
 export default function Postcard(props){
->>>>>>> 201801445
     const classes = useStyles();
     return(
         <div className={classes.postcard}>
             <Card>
-                <CardActionArea href={'/detail/' + props.id } target="_blank">
+            <CardActionArea href={'/detail/' + props.id } target="_blank">
                     <CardMedia
                         component="img"
                         height="200"
@@ -38,24 +34,11 @@ export default function Postcard(props){
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-<<<<<<< HEAD
-                            {carname}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Price: <FontAwesomeIcon icon="rupee-sign" /> {price}
-=======
                             {props.carModel}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
                             Price: <FontAwesomeIcon icon="rupee-sign" /> {props.price}
->>>>>>> 201801445
                         </Typography>
-                        {buysell && buysell.length>0?(
-                            <div>{buysell}</div>        
-                        ):(
-                            <div></div>
-                        )
-                        }
                     </CardContent>
                 </CardActionArea>
             </Card>

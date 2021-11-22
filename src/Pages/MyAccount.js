@@ -5,7 +5,8 @@ import { Grid, makeStyles } from '@material-ui/core'
 import Navbar from '../Components/Navbar'
 import Postcard from '../Components/Postcard'
 
-import db from '../firebase'
+// import db from '../firebase'
+import db from '../Firebase'
 
 function MyAccount() {
     const carnames = ["car1","car2","car3","car4","car5","car6"]
@@ -49,7 +50,8 @@ function MyAccount() {
                         <Carousel className="carsold_carousel">
                         {cars.map((car)=>(
                             <Grid key={car.id} container justifyContent="center">
-                                <Postcard carname={car.name} price={car.price} buysell={car.type}/>
+                                <Postcard carModel={car.name} price={car.price} 
+                                image={<img src=""/>} buysell={car.type}/>
                             </Grid>
                         ))
                         }
