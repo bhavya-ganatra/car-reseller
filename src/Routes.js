@@ -12,7 +12,7 @@ export default function Routes(){
             <Home path="/" />
             <Cars path="/cars" />
             <Sell path="/sell" />
-            <Detail path="/detail" />
+            <Detail path="/detail/:id" />
         </Router>
         </>
     );

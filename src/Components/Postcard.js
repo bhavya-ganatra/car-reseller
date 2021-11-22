@@ -19,24 +19,25 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function Postcard(){
+export default function Postcard(props){
     const classes = useStyles();
     return(
         <div className={classes.postcard}>
-            <Card sx={{ maxWidth: 500 }}>
-                <CardActionArea href="/detail" target="_blank">
+            <Card>
+                <CardActionArea href={'/detail/' + props.id } target="_blank">
                     <CardMedia
                         component="img"
                         height="200"
-                        image="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-                        alt="green iguana"
+                        width="400"
+                        image={props.image}
+                        alt="Verna"
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            Car
+                            {props.carModel}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Price: <FontAwesomeIcon icon="rupee-sign" /> 400
+                            Price: <FontAwesomeIcon icon="rupee-sign" /> {props.price}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

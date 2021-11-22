@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import Navbar from "../Components/Navbar";
 import Postcard from "../Components/Postcard";
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,6 +6,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { Grid } from "@material-ui/core";
+import db from '../Firebase';
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -56,6 +57,21 @@ export default function Cars(){
     const handleSearch = (event) => {
         console.log(location + " " + budget + " " + brand);
     }
+
+    const [cars,setCars]=useState([])
+
+    useEffect(() => {
+        db.collection("cars").onSnapshot((snapshot) => {
+          setCars(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            })) 
+        );
+        });
+        console.log({ cars });
+      }, []);
+
 
     return(
         <div>
@@ -130,21 +146,17 @@ export default function Cars(){
             
 
             <Grid container spacing={1}>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <Postcard className={classes.postcard}/>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <Postcard className={classes.postcard}/>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <Postcard className={classes.postcard}/>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <Postcard className={classes.postcard}/>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}>
-                    <Postcard className={classes.postcard}/>
-                </Grid>
+                {cars?.map(({ id, data }) => (
+                    <Grid key={id} item xs={12} sm={6} md={3} lg={2}>
+                    <Postcard
+                        id={id}
+                        data={data}
+                        carModel={data.carModel}
+                        price={data.price}
+                        image={data.images[0]}
+                    />
+                    </Grid>
+                ))}
             </Grid>
 
         </div>
