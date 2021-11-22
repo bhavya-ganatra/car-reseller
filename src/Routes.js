@@ -13,8 +13,12 @@ export default function Routes(){
             <Home path="/" />
             <Cars path="/cars" />
             <Sell path="/sell" />
+<<<<<<< HEAD
             <Detail path="/detail" />
             <MyAccount path="/myaccount"/>
+=======
+            <Detail path="/detail/:id" />
+>>>>>>> 201801445
         </Router>
         </>
     );

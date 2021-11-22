@@ -84,7 +84,6 @@ export default function Navbar(){
                 >
                 {/* <Link to="/"> </Link> */}
               </GoogleLogin>
-
                 
             </div>
             </Toolbar>
