@@ -15,6 +15,7 @@ function Login() {
                 type:actionTypes.SET_USER,
                 user:res.user
             })
+            localStorage.setItem('curuser',JSON.stringify(res.user));
             db.collection('users')
             .doc(res.user.uid)
             .set({
