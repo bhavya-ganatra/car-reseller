@@ -67,7 +67,15 @@ export default function Navbar(){
                   Sell car
                 </Button>
 
-                <GoogleLogin
+                <Button
+                  size="large"
+                  href="/login"
+                  style={{ paddingRight: "20px", color: "white" }}
+                >
+                  Login
+                </Button>
+
+                {/* <GoogleLogin
                     //clientId={client_id}
                     buttonText=""
                     onSuccess={responseGoogle}
@@ -82,8 +90,8 @@ export default function Navbar(){
                     />
                     )}
                 >
-                {/* <Link to="/"> </Link> */}
-              </GoogleLogin>
+                 <Link to="/"> </Link> 
+              </GoogleLogin> */}
                 
             </div>
             </Toolbar>

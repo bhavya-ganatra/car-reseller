@@ -23,10 +23,10 @@ export default function Detail(props){
             <Images images={car.images} />
             <p style={{lineHeight:'2', fontSize: '20px', marginLeft: '100px', marginRight:'100px'}}>
                 <b>Brand</b>: {car.carBrand} <br/>
-                <b>Engine</b>: {car.engine} <br/>
+                <b>Engine</b>: {car.engine} cc<br/>
                 <b>Fuel type</b>: {car.fuelType} <br/>
                 <b>Location</b>: {car.location} <br/>
-                <b>Mileage</b>: {car.mileage} <br/>
+                <b>Mileage</b>: {car.mileage} kmpl<br/>
                 <b>Price</b>: {car.price} <br/>
                 <b>Seating Capacity</b>: {car.seatingCapacity} <br/>
                 <b>Seller Name</b>: {car.seller} <br/>
