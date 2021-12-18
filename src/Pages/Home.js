@@ -50,10 +50,11 @@ export default function Home(){
 
             <div>
                 <h1 style={{textAlign: 'center'}}>About Us</h1>
-                <p style={{textAlign: 'center', width: '90%', margin:'auto'}}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 
-                    the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,
-                     but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-                      containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                <p style={{textAlign: 'center', width: '90%', margin:'auto'}}>
+                    Car-Reseller is a website where the search of your perfect second-hand car comes to an end. This website provides the buyer with rich options and various
+                    features in order to search the dream car easily. Car-Reseller also allows consumers to upload the details about their second-hand car which they want to sell.
+                    It provides a great chat feature to help with a smooth conversation between buyer and seller. 
+                </p>
             </div>
 
             <div style={{textAlign: 'center'}}>
@@ -61,17 +62,17 @@ export default function Home(){
                 <div className={classes.vertical}>
                     
                     <div>
-                        <Button variant="text" href="/" className={classes.left}> Mumbai</Button>
-                        <Button variant="text" href="/" className={classes.left}> Banglore</Button>
-                        <Button variant="text" href="/" className={classes.left}> New Delhi</Button>
-                        <Button variant="text" href="/" className={classes.left}> Pune</Button>
+                        <Button variant="text" href="/cars/Mumbai" className={classes.left}> Mumbai</Button>
+                        <Button variant="text" href="/cars/Banglore" className={classes.left}> Banglore</Button>
+                        <Button variant="text" href="/cars/Delhi" className={classes.left}> New Delhi</Button>
+                        <Button variant="text" href="/cars/Pune" className={classes.left}> Pune</Button>
                     </div>
                     
                     <div>
-                        <Button variant="text" href="/" className={classes.left}> Ahemdabad</Button>
-                        <Button variant="text" href="/" className={classes.left}> Chennai</Button>
-                        <Button variant="text" href="/" className={classes.left}> Kolkata</Button>
-                        <Button variant="text" href="/" className={classes.left}> Hyderabad</Button>
+                        <Button variant="text" href="/cars/Ahemdabad" className={classes.left}> Ahemdabad</Button>
+                        <Button variant="text" href="/cars/Chennai" className={classes.left}> Chennai</Button>
+                        <Button variant="text" href="/cars/Kolkata" className={classes.left}> Kolkata</Button>
+                        <Button variant="text" href="/cars/Hyderabad" className={classes.left}> Hyderabad</Button>
                     </div>
                     
                     <div style={{marginTop: '40px', backgroundColor: 'powderblue'}}>

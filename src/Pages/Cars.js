@@ -38,6 +38,7 @@ export default function Cars(){
     const [location, setLocation] = React.useState('None');
     const [budget, setBudget] = React.useState('None');
     const [brand, setBrand] = React.useState('None');
+    var x = db.collection('cars');
 
     const selectLocation = (event) => {
         setLocation(event.target.value);
@@ -54,14 +55,44 @@ export default function Cars(){
         console.log(event.target.value);
     };
 
-    const handleSearch = (event) => {
+    const HandleSearch = (event) => {
         console.log(location + " " + budget + " " + brand);
+        
+        if(location != 'None')
+        {x = x.where('location', '==', location);}
+
+        if(brand != 'None')
+        {x = x.where('carBrand', '==', brand);}
+
+        if(budget != 'None')
+        {
+            if(budget == '0')
+            x = x.where('price', '>=', 0).where('price', '<=', 300000);
+            if(budget == '3')
+            x = x.where('price', '>=', 300000).where('price', '<=', 600000);
+            if(budget == '6')
+            x = x.where('price', '>=', 600000).where('price', '<=', 1000000);
+            if(budget == '10')
+            x = x.where('price', '>=', 1000000);
+        }
+        
+        x.onSnapshot((snapshot) => {
+            setCars(
+            snapshot.docs.map((doc) => ({
+                id: doc.id,
+                data: doc.data(),
+            })) 
+        );
+        });
+        console.log({ setCars });
+
     }
 
     const [cars,setCars]=useState([])
 
     useEffect(() => {
-        db.collection("cars").onSnapshot((snapshot) => {
+
+        x.onSnapshot((snapshot) => {
           setCars(
             snapshot.docs.map((doc) => ({
               id: doc.id,
@@ -94,6 +125,7 @@ export default function Cars(){
                     <option value={'Ahemdabad'}>Ahemdabad</option>
                     <option value={"Kolkata"}>Kolkata</option>
                     <option value={"Banglore"}>Banglore</option>
+                    <option value={"Delhi"}>Delhi</option>
                     </Select>
                 </FormControl>
             </div>
@@ -131,13 +163,13 @@ export default function Cars(){
                     <option value={"Maruti"}>Maruti Suzuki</option>
                     <option value={"Tata"}>Tata</option>
                     <option value={"Mahindra"}>Mahindra</option>
-                    <option value={"Toyata"}>Toyata</option>
+                    <option value={"Toyota"}>Toyata</option>
                     </Select>
                 </FormControl>
             </div>
 
                 <Button variant="contained" color="primary"
-                        onClick={() => handleSearch()}
+                        onClick={() => HandleSearch()}
                         className={classes.search}>
                     SEARCH
                 </Button>
@@ -151,9 +183,6 @@ export default function Cars(){
                     <Postcard
                         id={id}
                         data={data}
-                        carModel={data.carModel}
-                        price={data.price}
-                        image={data.images[0]}
                     />
                     </Grid>
                 ))}

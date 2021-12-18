@@ -25,19 +25,28 @@ export default function Postcard(props){
         <div className={classes.postcard}>
             <Card>
             <CardActionArea href={'/detail/' + props.id } target="_blank">
+                    {props.data.images ?
+                        <CardMedia
+                        component="img"
+                        height="200"
+                        width="400"
+                        image={props.data.images[0]}
+                        alt="Verna"
+                    /> :
                     <CardMedia
                         component="img"
                         height="200"
                         width="400"
-                        image={props.image}
-                        alt="Verna"
+                        //image={props.data.images[0]}
+                        alt= {props.data.carModel}
                     />
+                    }
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">
-                            {props.carModel}
+                            {props.data.carModel}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Price: <FontAwesomeIcon icon="rupee-sign" /> {props.price}
+                            Price: <FontAwesomeIcon icon="rupee-sign" /> {props.data.price}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
