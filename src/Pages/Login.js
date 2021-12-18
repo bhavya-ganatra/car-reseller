@@ -24,7 +24,10 @@ function Login() {
                 photoURL:res.user.photoURL,
                 uid:res.user.uid                
             },{merge:true})
-            .then(()=>console.log('logged in'))
+            .then(()=>{
+                console.log('Logged in')
+                window.location.replace("/");
+            })
             .catch((error)=>console.log('Failed',error))
         })
         .catch(err=>alert('err occured:',err))

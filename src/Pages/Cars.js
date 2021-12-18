@@ -186,6 +186,7 @@ export default function Cars(){
                     />
                     </Grid>
                 ))}
+                {cars.length==0?<h1 style={{padding:'20px'}}>No results</h1>:<></>}
             </Grid>
 
         </div>

@@ -12,19 +12,23 @@ function MyAccount() {
     const carnames = ["car1","car2","car3","car4","car5","car6"]
     // const carnames=[]
     const [cars,setCars] = useState([]);
-
+    const user = JSON.parse(localStorage.curuser)
+    
     useEffect(()=>{
         db.collection('users')
         .doc('user1')//id of document -- current user
-        .get()
-        .then((queryData)=>{
+        .onSnapshot((queryData)=>{
+            console.log(queryData.data().mycars)
+            // queryData.map(doc=>console.log("yy",doc.data()))
+            // setCars(queryData.data().mycars)
             setCars(queryData.data().mycars)
         })
-        .catch(err=>console.log(err))
+        // .catch(err=>console.log(err))
 
         console.log(cars)
     },[])
 
+    
 
     return (
         <div className="myaccount">
@@ -33,15 +37,16 @@ function MyAccount() {
                 <ul className="userdetail_ul">
                     <li className="userdetail_li">
                         <label>Name:</label>
-                        <span>User1</span>
+                        <span>{user.displayName}</span>
                     </li>
                     <li className="userdetail_li">
                         <label>Email:</label>
-                        <span>user1@gmail.com</span>
+                        <span>{user.email}</span>
                     </li>
                 </ul>
             </div>
             
+
             <div className="carsold">
                 {cars && cars.length>0?
                     (
@@ -49,9 +54,10 @@ function MyAccount() {
                         <h1>Sold Cars</h1>
                         <Carousel className="carsold_carousel">
                         {cars.map((car)=>(
-                            <Grid key={car.id} container justifyContent="center">
-                                <Postcard carModel={car.name} price={car.price} 
-                                image={<img src=""/>} buysell={car.type}/>
+                            <Grid key={car.carid} container justifyContent="center">
+                                {/* <Postcard id={car.carid} carModel={car.name} price={car.price} 
+                                image={<img src=""/>} buysell={car.type}/> */}
+                                <h1>{car.name}</h1>
                             </Grid>
                         ))
                         }

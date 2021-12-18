@@ -7,9 +7,11 @@ import Button from "@material-ui/core/Button";
 import { Cookies, useCookies } from "react-cookie";
 import GoogleLogin from "react-google-login";
 import { GoogleOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 
 export default function Navbar(){
-
+    const user = JSON.parse(localStorage.curuser)
+    console.log('Navbar',user)
     const [cookie, setCookie] = useCookies([""]);
     const cookies = new Cookies();
     const userCookie = cookies.get("userCookie");
@@ -29,7 +31,10 @@ export default function Navbar(){
       const fail = (res) => {
         console.log("Failed ", res);
       };
-
+      const HandleMyAccount = ()=>{
+        console.log('clicked')
+        window.location.replace(`/myaccount/${user.uid}`);
+      }
     return(
         <div>
         <AppBar position="fixed">
@@ -67,6 +72,7 @@ export default function Navbar(){
                   Sell car
                 </Button>
 
+                {!user?
                 <Button
                   size="large"
                   href="/login"
@@ -74,7 +80,14 @@ export default function Navbar(){
                 >
                   Login
                 </Button>
-
+                :
+                // <Link to={`/myaccount`}>
+                //   MyAccount
+                // </Link>
+                <Button onClick={HandleMyAccount}>{user.displayName}</Button>
+                }
+                
+                
                 {/* <GoogleLogin
                     //clientId={client_id}
                     buttonText=""

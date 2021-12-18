@@ -2,8 +2,12 @@ import {React, useState} from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import db from '../Firebase';
 import Button from "@material-ui/core/Button";
+import Navbar from "../Components/Navbar";
 
 const useStyles = makeStyles((theme) => ({
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+      },
     label: {
         fontSize: '20px',
     },
@@ -44,7 +48,7 @@ export default function Sell(){
 
     return(
         <div style={{marginLeft: '50px'}}>
-
+            <Navbar className={classes.appBar}/>
         {
             formFill=='true'? <div>
             <h2 style={{marginTop: '30px', marginBottom: '30px'}}> Thank you for filling the form!</h2>

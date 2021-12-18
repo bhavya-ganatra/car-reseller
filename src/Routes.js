@@ -18,7 +18,7 @@ export default function Routes(){
             <Home path="/" />
             <Cars path="/cars" />
             <Sell path="/sell" />
-            <MyAccount path="/myaccount"/>
+            <MyAccount path="/myaccount/:id"/>
             <Detail path="/detail/:id" />
             <Login path="/login" />
             {/* <Sidebar path="/peers/:peerId" />
