@@ -92,6 +92,10 @@ function MyAccount() {
                         <label>Email:</label>
                         <span>{user.email}</span>
                     </li>
+                    <li className="userdetail_li">
+                        <label>Your Token:</label>
+                        <span>{user.uid}</span>
+                    </li>
                 </ul>
             </div>
             
@@ -100,12 +104,12 @@ function MyAccount() {
                 {cars && cars.length>0?
                     (
                         <div>
-                        <h1>Sold Cars</h1>
+                        <h1>Your Cars</h1>
                         <Carousel className="carsold_carousel">
                         {cars.map((car)=>(
                             <Grid key={car.carid} container justifyContent="center">
                                 <Postcard id={car.carid} data={car}/>
-                                {/* <h1>{car.carBrand?.car.carBrand}</h1> */}
+                                {/* <h3 style={{"margin"}}>{car.type}</h3> */}
                             </Grid>
                         ))
                         }
@@ -113,7 +117,7 @@ function MyAccount() {
                         </div>
                     )
                     :(
-                        <h3>You have not sold any cars</h3>
+                        <h3>No cars</h3>
                     )
                 }
             </div>

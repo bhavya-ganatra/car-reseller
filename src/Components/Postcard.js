@@ -48,6 +48,11 @@ export default function Postcard(props){
                         <Typography variant="body2" color="text.secondary">
                             Price: <FontAwesomeIcon icon="rupee-sign" /> {props.data.price}
                         </Typography>
+                        {
+                            props.data.type?(<Typography variant="body2" color="text.secondary">
+                            Type: {props.data.type}
+                        </Typography>):<></>
+                        }
                     </CardContent>
                 </CardActionArea>
             </Card>

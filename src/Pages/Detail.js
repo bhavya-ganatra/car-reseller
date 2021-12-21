@@ -88,7 +88,10 @@ export default function Detail(props){
                 db.collection('users').doc(token).collection('mycarsCollection')
                 .add({
                     "carid":id,
-                    "type":'bought'
+                    "type":"bought",
+                    "images": car.images,
+                    "carModel":car.carModel,
+                    "price":car.price
                 })
                 .then(res=>console.log('added to buyer'))
 

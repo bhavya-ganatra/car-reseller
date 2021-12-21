@@ -48,7 +48,11 @@ export default function Sell(){
                     else{
                         accumulator['images'] = [currentValue.value];
                     }
-                    
+
+                }
+                else if(currentValue.id=="price" || currentValue.id=="engine" || currentValue.id=="mileage" ||
+                currentValue.id=="seatingCapacity"){
+                    accumulator[currentValue.id] = parseInt(currentValue.value);
                 }
                 else{
                     accumulator[currentValue.id] = currentValue.value;
