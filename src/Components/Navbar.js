@@ -75,6 +75,13 @@ export default function Navbar(){
                 >
                   Sell car
                 </Button>
+                <Button
+                  size="large"
+                  href="/peers"
+                  style={{ paddingRight: "20px", color: "white" }}
+                >
+                  Chat
+                </Button>
 
                 {!user?
                 <Button

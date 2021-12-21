@@ -19,9 +19,10 @@ export default function City(){
     const [cars,setCars]=useState([])
 
     useEffect(() => {
-
+        console.log(location)
         db.collection('cars')
         .where('location', '==', location)
+        .where('carStatus','==','onSell')
         .onSnapshot((snapshot) => {
           setCars(
             snapshot.docs.map((doc) => ({

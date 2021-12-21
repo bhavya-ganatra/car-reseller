@@ -59,6 +59,7 @@ export default function Routes(){
                     <Route path="/myaccount/:id" element={<MyAccount />} />
                     <Route path="/detail/:id" element={<Detail />} />
                     <Route path="/login" element={<Login />} />
+                    <Route path="/cars/:city" element={<City />} />
                     <Route exact path="peers" element={
                         <div className="app">
                             <Navbar />

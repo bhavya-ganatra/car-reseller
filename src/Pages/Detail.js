@@ -154,9 +154,10 @@ export default function Detail(props){
     return(
         <div>
             <Navbar/>
-            <h1 style={{textAlign: 'center'}}>{car.carModel}</h1>
+            {/* <h1 style={{textAlign: 'center'}}>{car.carModel}</h1> */}
             <Images images={car.images} />
             <p style={{lineHeight:'2', fontSize: '20px', marginLeft: '100px', marginRight:'100px'}}>
+                <b>Model</b>: {car.carModel} <br/>
                 <b>Brand</b>: {car.carBrand} <br/>
                 <b>Engine</b>: {car.engine} cc<br/>
                 <b>Fuel type</b>: {car.fuelType} <br/>
