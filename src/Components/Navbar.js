@@ -10,11 +10,15 @@ import { GoogleOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 
 export default function Navbar(){
-    const user = JSON.parse(localStorage.curuser)
-    console.log('Navbar',user)
+    
     const [cookie, setCookie] = useCookies([""]);
     const cookies = new Cookies();
     const userCookie = cookies.get("userCookie");
+    let user=null
+    if(localStorage.curuser){
+      user = JSON.parse(localStorage.curuser)
+    }
+    // console.log('Navbar',user)
 
     const responseGoogle = (response) => {
         console.log(response);

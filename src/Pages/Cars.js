@@ -38,7 +38,7 @@ export default function Cars(){
     const [location, setLocation] = React.useState('None');
     const [budget, setBudget] = React.useState('None');
     const [brand, setBrand] = React.useState('None');
-    var x = db.collection('cars');
+    var x = db.collection('cars').where('carStatus','==','onSell');
 
     const selectLocation = (event) => {
         setLocation(event.target.value);
@@ -56,6 +56,7 @@ export default function Cars(){
     };
 
     const HandleSearch = (event) => {
+        x = db.collection('cars').where('carStatus','==','onSell');
         console.log(location + " " + budget + " " + brand);
         
         if(location != 'None')

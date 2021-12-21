@@ -12,20 +12,69 @@ function MyAccount() {
     const carnames = ["car1","car2","car3","car4","car5","car6"]
     // const carnames=[]
     const [cars,setCars] = useState([]);
-    const user = JSON.parse(localStorage.curuser)
+    let user=null
+    if(localStorage.curuser){
+      user = JSON.parse(localStorage.curuser)
+    }
     
-    useEffect(()=>{
+    useEffect( ()=>{
+        if(localStorage.curuser){
+            user = JSON.parse(localStorage.curuser)
+          }
+        console.log(user.uid)
+        let allCars = []
+        
+        // const setVal = async ()=>{
+        // db.collection('users')
+        // .doc(user.uid)
+        // .collection('mycarsCollection')
+        // .get()
+        // .then(qData=>{
+        //     // setCars(qData.docs.map(doc=>doc.data()))
+        //     // qData.docs.map(doc=>console.log(doc.data()))
+            
+        //     qData.docs.forEach(element => {
+        //         console.log(element.data().carid)
+        //        db.collection('cars').doc(element.data().carid).get()
+        //     //    .then(res=>allCars.push(res.data()))
+        //         .then(res=>setCars(prevState => [...prevState, res.data())] )
+        //     })
+
+        //     // console.log(qData)
+        // })
+        //     // setCars(allCars)
+        //     console.log(cars)
+        // }
+        // setVal()
+
+
+        // TODO: In Sell Page store all the Attributes
         db.collection('users')
-        .doc('user1')//id of document -- current user
-        .onSnapshot((queryData)=>{
-            console.log(queryData.data().mycars)
-            // queryData.map(doc=>console.log("yy",doc.data()))
-            // setCars(queryData.data().mycars)
-            setCars(queryData.data().mycars)
+        .doc(user.uid)
+        .collection('mycarsCollection')
+        .get()
+        .then(qData=>{
+            setCars(qData.docs.map(doc=>doc.data()))
+            // qData.docs.map(doc=>console.log(doc.data()))
+
+            // console.log(qData)
         })
+        // console.log('cars',cars)
+        
+
+
+
+        // db.collection('users')
+        // .doc('user1')//id of document -- current user
+        // .onSnapshot((queryData)=>{
+        //     console.log(queryData.data().mycars)
+        //     // queryData.map(doc=>console.log("yy",doc.data()))
+        //     // setCars(queryData.data().mycars)
+        //     setCars(queryData.data().mycars)
+        // })
         // .catch(err=>console.log(err))
 
-        console.log(cars)
+        // console.log(cars)
     },[])
 
     
@@ -55,9 +104,8 @@ function MyAccount() {
                         <Carousel className="carsold_carousel">
                         {cars.map((car)=>(
                             <Grid key={car.carid} container justifyContent="center">
-                                {/* <Postcard id={car.carid} carModel={car.name} price={car.price} 
-                                image={<img src=""/>} buysell={car.type}/> */}
-                                <h1>{car.name}</h1>
+                                <Postcard id={car.carid} data={car}/>
+                                {/* <h1>{car.carBrand?.car.carBrand}</h1> */}
                             </Grid>
                         ))
                         }

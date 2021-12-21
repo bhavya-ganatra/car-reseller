@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import db from '../Firebase';
 import Button from "@material-ui/core/Button";
 import Navbar from "../Components/Navbar";
+import Login from "./Login";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -22,6 +23,10 @@ export default function Sell(){
     const classes = useStyles();
     const [inputs, setInputs] = useState({});
     const [formFill, setFormFill] = useState('false');
+    let user=null
+    if(localStorage.curuser){
+      user = JSON.parse(localStorage.curuser)
+    }
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -33,22 +38,46 @@ export default function Sell(){
         event.preventDefault();
         setFormFill('true');
         const input = [...event.target.elements];
-        
+        console.log(input)
         const data = input.reduce((accumulator, currentValue) => {
             if(currentValue.id){
-                accumulator[currentValue.id] = currentValue.value;
+                if(currentValue.id.startsWith('image')){
+                    if(accumulator['images']){
+                        accumulator['images'].push(currentValue.value);
+                    }
+                    else{
+                        accumulator['images'] = [currentValue.value];
+                    }
+                    
+                }
+                else{
+                    accumulator[currentValue.id] = currentValue.value;
+                }
             }
             return accumulator;
         }, {});
 
         console.log({ data });
-        db.collection("cars").add(data);
+        db.collection("cars").add(data)
+        .then(doc=>{
+            db.collection('users').doc(user.uid)
+            .collection('mycarsCollection')
+            .add({
+                //TODO: Add all attributes required in myaccount page
+                "carid":doc.id,
+                "type":"onSell",
+                "images":data['images'],
+                "carModel":data['carModel'],
+                "price":data['price']
+            })
+        })
+
     };
 
 
     return(
         <div style={{marginLeft: '50px'}}>
-            <Navbar className={classes.appBar}/>
+        <Navbar className={classes.appBar}/>
         {
             formFill=='true'? <div>
             <h2 style={{marginTop: '30px', marginBottom: '30px'}}> Thank you for filling the form!</h2>
@@ -86,18 +115,20 @@ export default function Sell(){
                 />
                 </label> <br />
     
-                <label className={classes.label}>Seller Name:
-                <input 
+                {/* <label hidden className={classes.label}>Seller Name: */}
+                <input hidden
                     id = "seller"
                     type="text" 
                     name="seller" 
-                    value={inputs.seller || ""} 
+                    // value={inputs.seller || ""} 
                     onChange={handleChange}
                     autoComplete="off"
                     required
                     className={classes.input}
+                    defaultValue={user.displayName}
+                    
                 />
-                </label> <br />
+                 {/* </label> <br /> */}
     
                 <label className={classes.label}>Location:
                 <input 
@@ -175,7 +206,32 @@ export default function Sell(){
                     className={classes.input}
                     />
                 </label> <br />
-    
+
+                <label className={classes.label}>Image1:
+                <input 
+                    id = "image1"
+                    type="text" 
+                    name="image1" 
+                    value={inputs.image1 || ""} 
+                    onChange={handleChange}
+                    autoComplete="off"
+                    required
+                    className={classes.input}
+                />
+                </label> <br />
+
+                <label className={classes.label}>image2:
+                <input 
+                    id = "image2"
+                    type="text" 
+                    name="image2" 
+                    value={inputs.image2 || ""} 
+                    onChange={handleChange}
+                    autoComplete="off"
+                    required
+                    className={classes.input}
+                />
+                </label> <br />
     
                 <p className={classes.label}>Description:</p>
                 <label>
@@ -189,7 +245,8 @@ export default function Sell(){
                     required
                     />
                 </label> <br />
-    
+                <input type="text" id="sellerId" defaultValue={user.uid} hidden></input>
+                <input type="text" id="carStatus" defaultValue="onSell" hidden></input>
                 <input type="submit" />
             </form>
     

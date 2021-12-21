@@ -114,17 +114,7 @@ function Chat() {
                     </p>
                 </div>
 
-                <div className="chat__headerRight">
-                    <IconButton>
-                        <SearchOutlined/>
-                    </IconButton>
-                    <IconButton>
-                        <AttachFileIcon/>
-                    </IconButton>
-                    <IconButton>
-                        <MoreVert/>
-                    </IconButton>
-                </div>
+                
             </div>
             <div className="chat__body">
                 {messages.map(message=>(
@@ -144,12 +134,10 @@ function Chat() {
                 </p> */}
             </div>
             <div className="chat__footer">
-                <InsertEmoticonIcon/>
                 <form>
                     <input autoFocus="autofocus" value={input} onChange={e=>setInput(e.target.value)} type="text" placeholder="Type a message"/>
                     <button onClick={sendMessage} type="submit">Send a message</button>
                 </form>
-                <MicIcon/>
             </div>
         </div>
     )

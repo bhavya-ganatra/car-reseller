@@ -5,10 +5,11 @@ import Chat from './Chat'
 import {
     BrowserRouter,
     Routes,
-    Route
+    Route,
   } from "react-router-dom";
 import './MainChat.css'
 function MainChat() {
+    
     // redirection - Chat path route is not working
     // WORKED: Second solution with Routes
     return (
@@ -23,11 +24,12 @@ function MainChat() {
                     
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/peers/" element={<Sidebar/>}/>
                         <Route path="/peers/:peerId" element={<> <Sidebar/><Chat/> </>}/>
+                        <Route path="/peers/" element={<Sidebar/>}/>
                         {/* <Sidebar path="/peers/:peerId"/>
                         <Chat path="/peers/:peerId" /> */}
                     </Routes>
+                    
                 </BrowserRouter>
             </div>
         </div>

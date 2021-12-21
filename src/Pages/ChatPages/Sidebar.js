@@ -36,27 +36,8 @@ function Sidebar() {
         <div className="sidebar">
             <div className="sidebar__header">
                 <Avatar src={user?.photoURL}/>
-                <div className="sidebar__headerRight">
-                    <IconButton>
-                        <DonutLargeIcon/>
-                    </IconButton>
+                <h3>{user.displayName}</h3>
 
-                    <IconButton>
-                        <ChatIcon/>
-                    </IconButton>
-                    
-                    <IconButton>
-                        <MoreVertIcon/>
-                    </IconButton>
-                    
-                </div>
-
-            </div>
-            <div className="sidebar__search">
-                <div className="sidebar__searchContainer">
-                    <SearchOutlinedIcon />
-                    <input placeholder="Search or start a new chat" type="text"/>
-                </div>
             </div>
             <div className="sidebar__chats">
                 {peers.map(peer=>(

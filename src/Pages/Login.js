@@ -1,20 +1,20 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
 import db from '../Firebase'
-import { useStateValue } from '../StateProvider'
-import { actionTypes } from '../reducer'
+// import { useStateValue } from '../StateProvider'
+// import { actionTypes } from '../reducer'
 import { auth,provider } from '../Firebase'
 import './Login.css'
 function Login() {
-    const [{},dispatch] = useStateValue();
+    // const [{},dispatch] = useStateValue();
     const signIn = ()=>{
         auth.signInWithPopup(provider)
         .then(res=>{
             console.log(res)
-            dispatch({
-                type:actionTypes.SET_USER,
-                user:res.user
-            })
+            // dispatch({
+            //     type:actionTypes.SET_USER,
+            //     user:res.user
+            // })
             localStorage.setItem('curuser',JSON.stringify(res.user));
             db.collection('users')
             .doc(res.user.uid)
